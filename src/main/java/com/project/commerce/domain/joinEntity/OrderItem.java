@@ -1,16 +1,15 @@
-package com.project.commerce.domain.orderItem;
+package com.project.commerce.domain.joinEntity;
 
 import com.project.commerce.domain.item.Item;
 import com.project.commerce.domain.order.Order;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class OrderItem {
 
     @Id
@@ -24,4 +23,7 @@ public class OrderItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ITEM_ID")
     private Item item;
+
+    private Integer count;
+
 }

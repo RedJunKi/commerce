@@ -24,10 +24,11 @@ class UserControllerTest {
     @BeforeEach
     void setUp() {
         // 테스트 전에 필요한 데이터 추가
-        User user = new User();
-        user.setUsername("testuser");
-        user.setPassword("password");
-        user.setEmail("test@example.com");
+        User user = User.builder()
+                .username("testuser")
+                .password("password")
+                .email("test@example.com")
+                .build();
         userRepository.save(user);
     }
 

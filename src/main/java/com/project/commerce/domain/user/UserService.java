@@ -21,11 +21,12 @@ public class UserService {
     public void save(UserDto userDto) {
         validateDuplicateUsername(userDto.getUsername());
 
-        User user = new User();
-        user.setUsername(userDto.getUsername());
-        user.setPassword(userDto.getPassword());
-        user.setEmail(userDto.getEmail());
-        user.setAddress(userDto.getAddress());
+        User user = User.builder()
+                .username(userDto.getUsername())
+                .password(userDto.getPassword())
+                .email(userDto.getEmail())
+                .address(userDto.getAddress())
+                .build();
 
         userRepository.save(user);
     }
