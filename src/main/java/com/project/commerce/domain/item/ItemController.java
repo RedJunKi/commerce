@@ -40,7 +40,7 @@ public class ItemController {
     }
 
     @PatchMapping("/{itemId}/edit")
-    public String updateItem(@PathVariable Long itemId, @ModelAttribute("item") @RequestBody Item item) {
+    public String updateItem(@PathVariable Long itemId, @RequestBody Item item) {
         itemService.update(itemId, item);
         return "ok";
     }

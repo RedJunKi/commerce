@@ -1,7 +1,7 @@
 package com.project.commerce.domain.order;
 
 
-import com.project.commerce.domain.joinEntity.OrderItem;
+import com.project.commerce.domain.joinEntity.CartOrderItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +25,7 @@ public class OrderController {
 
     @GetMapping("/{id}")
     public String getOrderDetail(Long orderId) {
-        List<OrderItem> orderItems = orderService.getOrder(orderId);
+        List<CartOrderItem> cartOrderItems = orderService.getOrder(orderId);
         return "ok";
     }
 

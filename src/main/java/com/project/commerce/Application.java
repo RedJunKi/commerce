@@ -22,7 +22,7 @@ public class Application {
 
 	@RequiredArgsConstructor
 	@Component
-	public class postConstruct {
+	public static class postConstruct {
 
 		private final UserRepository userRepository;
 		private final ItemRepository itemRepository;
@@ -46,24 +46,28 @@ public class Application {
 					.name("빼빼로")
 					.price(1000)
 					.quantity(10)
+					.manufacturer("삼성")
 					.build();
 
 			Item item2 = Item.builder()
 					.name("빠삐코")
 					.price(1000)
 					.quantity(10)
+					.manufacturer("엘지")
 					.build();
 
 			Item item3 = Item.builder()
 					.name("물병")
 					.price(3000)
 					.quantity(20)
+					.manufacturer("두산")
 					.build();
 
 			Item item4 = Item.builder()
 					.name("커피")
 					.price(5000)
-					.quantity(10)
+					.quantity(30)
+					.manufacturer("엔씨")
 					.build();
 
 			itemRepository.save(item1);

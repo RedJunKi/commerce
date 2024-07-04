@@ -2,7 +2,7 @@ package com.project.commerce.domain.order;
 
 import com.project.commerce.domain.item.Item;
 import com.project.commerce.domain.item.ItemRepository;
-import com.project.commerce.domain.joinEntity.OrderItem;
+import com.project.commerce.domain.joinEntity.CartOrderItem;
 import com.project.commerce.domain.user.User;
 import com.project.commerce.domain.user.UserRepository;
 import com.project.commerce.domain.util.ObjectUtil;
@@ -26,10 +26,10 @@ public class OrderService {
         return user.getOrderList();
     }
 
-    public List<OrderItem> getOrder(Long orderId) {
+    public List<CartOrderItem> getOrder(Long orderId) {
         Order order = ObjectUtil.getObject(orderRepository.findById(orderId));
 
-        return order.getOrderItems();
+        return order.getCartOrderItems();
     }
 
     public void addCart(Long userId, Long itemId, int count) {

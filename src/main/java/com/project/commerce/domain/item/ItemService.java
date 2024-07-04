@@ -32,9 +32,11 @@ public class ItemService {
 
     public void update(Long itemId, Item item) {
         Item findItem = ObjectUtil.getObject(itemRepository.findById(itemId));
+        System.out.println(item.getName());
         findItem.setName(item.getName());
         findItem.setPrice(item.getPrice());
         findItem.setQuantity(item.getQuantity());
+        findItem.setManufacturer(item.getManufacturer());
 
     }
 }

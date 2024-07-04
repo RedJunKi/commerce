@@ -33,7 +33,8 @@ public class User extends BaseTimeEntity {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Order> orderList = new ArrayList<>();
 
+    @Builder.Default
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Cart cart;
+    private Cart cart = new Cart();
 
 }
