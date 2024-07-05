@@ -1,12 +1,10 @@
 package com.project.commerce.domain.order;
 
 
-import com.project.commerce.domain.joinEntity.CartOrderItem;
+import com.project.commerce.domain.joinEntity.CartItem;
+import com.project.commerce.domain.joinEntity.OrderItem;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,23 +15,30 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @GetMapping
-    public String getOrders(Long memberId) {
-        List<Order> orders = orderService.getOrders(memberId);
+    @GetMapping("/{userId}")
+    public String getOrders(@PathVariable Long userId) {
+        List<Order> orders = orderService.getOrders(userId);
         return "ok";
     }
 
-    @GetMapping("/{id}")
-    public String getOrderDetail(Long orderId) {
-        List<CartOrderItem> cartOrderItems = orderService.getOrder(orderId);
+    @GetMapping("/{userId}/{orderId}")
+    public String getOrderDetail(@PathVariable("userId") Long userId, @PathVariable("orderId") Long orderId) {
+        List<OrderItem> orderItems = orderService.getOrder(orderId);
         return "ok";
     }
 
     @PostMapping
-    public String singleOrder(Long userId, Long itemId, int count) {
-        orderService.addCart(userId, itemId, count);
-        return "ok";
+    public String singleItemOrder(@RequestParam("userId") Long userId,
+                                  @RequestParam("itemId") Long itemId,
+                                  @RequestParam("count") int count) {
+        int price = orderService.singleItemOrder(userId, itemId, count);
+        return price + "";
     }
 
+    @PostMapping("/{userId}")
+    public String cartOrder(@PathVariable("userId") Long userId) {
+        int result = orderService.cartOrder(userId);
+        return "" + result;
+    }
 
 }

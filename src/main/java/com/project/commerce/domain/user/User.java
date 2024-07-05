@@ -14,7 +14,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Table(name = "USERS")
 public class User extends BaseTimeEntity {
 
@@ -29,12 +28,19 @@ public class User extends BaseTimeEntity {
     @Embedded
     private Address address;
 
-    @Builder.Default
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Order> orderList = new ArrayList<>();
 
-    @Builder.Default
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Cart cart = new Cart();
+    private Cart cart;
 
+    @Builder
+    public User(String username, String password, String email, Address address) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.address = address;
+        this.orderList = new ArrayList<>();
+        this.cart = new Cart(this);
+    }
 }

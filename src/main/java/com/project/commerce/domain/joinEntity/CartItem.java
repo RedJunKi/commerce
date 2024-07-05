@@ -10,8 +10,9 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class CartOrderItem {
+public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,20 +22,19 @@ public class CartOrderItem {
     private Cart cart;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ORDER_ID")
-    private Order order;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ITEM_ID")
     private Item item;
 
     private Integer quantity;
 
-    public static CartOrderItem createCartItem(int count, Item item, Cart cart) {
-        return CartOrderItem.builder()
-                .cart(cart)
+    @Enumerated(EnumType.STRING)
+    private CartItemStatus cartItemStatus;
+
+    public static CartItem createCartItem(Item item, int count) {
+        return CartItem.builder()
                 .item(item)
                 .quantity(count)
+                .cartItemStatus(CartItemStatus.CART)
                 .build();
     }
 }

@@ -21,7 +21,19 @@ public class Item extends BaseTimeEntity {
 
     private String name;
     private Integer price;
-    private Integer quantity;
+    private Integer stock;
     private String manufacturer;
 
+
+    public void removeStock(int quantity) {
+        if (stock < quantity) {
+            throw new IllegalArgumentException("재고가 부족합니다.");
+        }
+
+        this.stock -= quantity;
+    }
+
+    public void addStock(int quantity) {
+        this.stock += quantity;
+    }
 }

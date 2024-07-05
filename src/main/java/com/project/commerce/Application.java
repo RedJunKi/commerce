@@ -30,13 +30,15 @@ public class Application {
 		@PostConstruct
 		public void constructUserAndItem() {
 
-			User user1 = User.builder().username("name1")
+			User user1 = User.builder()
+					.username("name1")
 					.password("123")
 					.email("email1")
 					.address(new Address())
 					.build();
 
-			User user2 = User.builder().username("name2")
+			User user2 = User.builder()
+					.username("name2")
 					.password("456")
 					.email("email2")
 					.address(new Address())
@@ -45,28 +47,28 @@ public class Application {
 			Item item1 = Item.builder()
 					.name("빼빼로")
 					.price(1000)
-					.quantity(10)
+					.stock(10)
 					.manufacturer("삼성")
 					.build();
 
 			Item item2 = Item.builder()
 					.name("빠삐코")
 					.price(1000)
-					.quantity(10)
+					.stock(10)
 					.manufacturer("엘지")
 					.build();
 
 			Item item3 = Item.builder()
 					.name("물병")
 					.price(3000)
-					.quantity(20)
+					.stock(20)
 					.manufacturer("두산")
 					.build();
 
 			Item item4 = Item.builder()
 					.name("커피")
 					.price(5000)
-					.quantity(30)
+					.stock(30)
 					.manufacturer("엔씨")
 					.build();
 

@@ -1,8 +1,10 @@
 package com.project.commerce.domain.cart;
 
+import com.project.commerce.domain.joinEntity.CartItem;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -13,13 +15,37 @@ public class CartController {
     private final CartService cartService;
 
     @GetMapping("/{userId}")
-    public String getCart(Long userId) {
-        return "ok";
+    public List<CartItem> getCart(@PathVariable("userId") Long userId) {
+        return cartService.getCartItems(userId);
     }
 
     @PostMapping
-    public String addCart(@RequestBody AddCartDTO addCartDTO) {
-        cartService.addCart(addCartDTO.getUserId(), addCartDTO.getItemId(), addCartDTO.getCount());
+    public String addCart(@RequestParam("userId") Long userId,
+                          @RequestParam("itemId") Long itemId,
+                          @RequestParam("count") int count) {
+        cartService.addCart(userId, itemId, count);
+        return "ok";
+    }
+
+    @PatchMapping
+    public String setItemQuantity(@RequestParam("userId") Long userId,
+                                  @RequestParam("itemId") Long itemId,
+                                  @RequestParam("count") int count) {
+        cartService.setItemQuantity(userId, itemId, count);
+        return "ok";
+    }
+
+
+    @DeleteMapping("/{userId}")
+    public String deleteCartItem(@PathVariable("userId") Long userId,
+                                 @RequestParam("itemId") Long itemId) {
+        cartService.deleteCartItem(userId, itemId);
+        return "ok";
+    }
+
+    @DeleteMapping
+    public String clearCart(@RequestParam("userId") Long userId) {
+        cartService.clearCart(userId);
         return "ok";
     }
 }

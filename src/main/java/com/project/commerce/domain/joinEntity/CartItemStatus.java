@@ -1,5 +1,5 @@
 package com.project.commerce.domain.joinEntity;
 
-public enum CartOrderItemStatus {
+public enum CartItemStatus {
     CART, ORDER, CANCEL
 }

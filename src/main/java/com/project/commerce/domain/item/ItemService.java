@@ -35,7 +35,7 @@ public class ItemService {
         System.out.println(item.getName());
         findItem.setName(item.getName());
         findItem.setPrice(item.getPrice());
-        findItem.setQuantity(item.getQuantity());
+        findItem.setStock(item.getStock());
         findItem.setManufacturer(item.getManufacturer());
 
     }

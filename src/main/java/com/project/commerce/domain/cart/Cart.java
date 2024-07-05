@@ -1,7 +1,7 @@
 package com.project.commerce.domain.cart;
 
 import com.project.commerce.domain.common.BaseTimeEntity;
-import com.project.commerce.domain.joinEntity.CartOrderItem;
+import com.project.commerce.domain.joinEntity.CartItem;
 import com.project.commerce.domain.user.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,9 +28,27 @@ public class Cart extends BaseTimeEntity {
 
     @Builder.Default
     @OneToMany(mappedBy = "cart", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CartOrderItem> cartOrderItems = new ArrayList<>();
+    private List<CartItem> cartItems = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private CartStatus cartStatus;
 
+    public Cart(User user) {
+        this.user = user;
+        this.cartStatus = CartStatus.CART;
+    }
+
+    public void addCartItem(CartItem cartItem) {
+        cartItem.setCart(this);
+        this.cartItems.add(cartItem);
+    }
+
+    public void removeCartItem(CartItem cartItem) {
+        cartItem.setCart(null);
+        this.cartItems.remove(cartItem);
+    }
+
+    public void clear() {
+        this.cartItems.clear();
+    }
 }
